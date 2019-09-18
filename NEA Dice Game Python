@@ -1,0 +1,122 @@
+import time
+import random
+#NEA Dice Game
+
+#Authenticate with a seperate text file
+import time
+username = (input("What is your username: "))
+f = open("test.txt", "r")
+x = f.read()
+f.close()
+z = open("test2.txt", "r")
+y = z.read()
+z.close()
+a = open("test3.txt", "r")
+p = a.read()
+a.close()
+b = open("test4.txt", "r")
+g = b.read()
+b.close()
+if username == x:
+    print("Username correct\n")
+    password = str(input("What is your password: "))
+    if password == y:
+        print("Access Granted\nWelcome")
+        nick1 = str(input("Player 1 What is Your Nickname\n: "))
+        print("Player 2, Please sign in...")
+        username2 = str(input("What is your username: "))
+        if username2 == p:
+            print("Username Correct\n")
+            password2 = str(input("What is your password: "))
+            if password2 == g:
+                print("Access Granted\nWelcome")
+                nick2 = str(input("Player 2 What is Your Nickname\n: "))
+            else:
+                print("Password Incorrect\nExiting...")
+                exit()
+        else:
+            print("Username Incorrect\nExiting...")
+            exit()
+            
+    else:
+        print("Password Incorrect\nExiting...")
+        time.sleep(2)
+        exit()
+else:
+    print("Username Incorrect\nExiting...")
+    time.sleep(2)
+    exit()
+
+
+input("----Press enter to start!----")
+#Create a virtual dice
+
+#when each player rolls the dice they are given a random interger
+p1_score = 0
+p2_score = 0
+#Create a for loop that runs the dice rolling for the 5 rounds
+for i in range(5):
+    roll_1 = [1,2,3,4,5,6]
+    roll_2 = [1,2,3,4,5,6]
+    if p1_score <0:
+        p1_score = p1_score*0
+    elif p2_score<0:
+        p2_score = p2_score*0
+
+    player_1_roll_1 = random.choice(roll_1)
+    player_1_roll_2 = random.choice(roll_2)
+    total = player_1_roll_1 + player_1_roll_2
+    print(nick1 +" got " +  str(player_1_roll_1 + player_1_roll_2) + " this round")
+    
+    if total %2 == 0:
+        p1_score = p1_score + 10
+        p1_score = p1_score + total
+    else:
+        p1_score = p1_score - 5
+        p1_score = p1_score + total
+        
+    time.sleep(1)
+    print(str(nick1) + " has " + str(p1_score) + " points so far")
+    print()
+    time.sleep(1)
+    player_2_roll_1 = random.choice(roll_1)
+    player_2_roll_2 = random.choice(roll_2)
+
+    total2 = player_2_roll_1 + player_2_roll_2
+    print(nick2 + " got " +  str(player_2_roll_1 + player_2_roll_2) + " this round")
+    time.sleep(1)
+#The points system where if the number on the dice is even they get 10 points or else 5 is deducted
+    if total2 %2 == 0:
+        p2_score = p2_score + 10
+        p2_score = p2_score + total2
+    else:
+        p2_score = p2_score - 5
+        p2_score = p2_score + total2
+    time.sleep(1)
+    print(str(nick2) + " has " + str(p2_score) + " points so far")
+    print()
+
+
+if p1_score > p2_score:
+    print()
+    print("-----The winner is " + str(nick1) + "-----")
+    print("---With " + str(p1_score) + " Points!---")
+elif p1_score == p2_score:
+    print("-----Its a Draw!-----")
+    print()
+    print("Each Player will roll 1 six-sided dice and the person with the highest number wins!")
+    draw = random.randint(1,6)
+    draw2 = random.randint(1,6)
+    print(nick1, " Rolled a " + str(draw))
+    print(nick2, " Rolled a " + str(draw2))
+    if draw > draw2:
+        print("-----The winner is " + str(nick1) + "-----")
+    else:
+        print("-----The winner is " + str(nick2) + "-----")
+
+else:
+    print()
+    print("-----The winner is " + str(nick2) + "-----")
+    print("-----With " + str(p2_score) + " Points!-----")
+
+input("\n\n\n-----Game Over-----\n---Press Enter To Quit---")
