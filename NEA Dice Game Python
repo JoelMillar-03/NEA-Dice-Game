@@ -4,12 +4,14 @@ import random
 
 #Authenticate with a seperate text file
 import time
+#Input username for player 1 
 username = (input("What is your username: "))
 f = open("test.txt", "r")
 x = f.read()
 f.close()
 z = open("test2.txt", "r")
 y = z.read()
+#Opens the files with the Username and passwords.
 z.close()
 a = open("test3.txt", "r")
 p = a.read()
@@ -17,6 +19,7 @@ a.close()
 b = open("test4.txt", "r")
 g = b.read()
 b.close()
+#If the usernames are correct the players are alowed access else they are kickd out of the program.
 if username == x:
     print("Username correct\n")
     password = str(input("What is your password: "))
@@ -34,6 +37,7 @@ if username == x:
             else:
                 print("Password Incorrect\nExiting...")
                 exit()
+                #Kicks out the player if they get the username and/or password incorrect.
         else:
             print("Username Incorrect\nExiting...")
             exit()
@@ -47,8 +51,7 @@ else:
     time.sleep(2)
     exit()
 
-
-input("----Press enter to start!----")
+input("----Press enter to start!----\n")
 #Create a virtual dice
 
 #when each player rolls the dice they are given a random interger
@@ -58,34 +61,45 @@ p2_score = 0
 for i in range(5):
     roll_1 = [1,2,3,4,5,6]
     roll_2 = [1,2,3,4,5,6]
-    if p1_score <0:
-        p1_score = p1_score*0
-    elif p2_score<0:
-        p2_score = p2_score*0
-
+#Picks a random number between 1 and 6 then ouputs it
     player_1_roll_1 = random.choice(roll_1)
     player_1_roll_2 = random.choice(roll_2)
     total = player_1_roll_1 + player_1_roll_2
     print(nick1 +" got " +  str(player_1_roll_1 + player_1_roll_2) + " this round")
-    
+#Adds points dependent on the number they rolled being odd or even
+    if p1_score <0:
+        p1_score = p1_score*0
+        print("Score reset to 0")
+    elif p2_score<0:
+        p2_score = p2_score*0
+        print("Score reset to 0")
+
     if total %2 == 0:
         p1_score = p1_score + 10
         p1_score = p1_score + total
     else:
         p1_score = p1_score - 5
         p1_score = p1_score + total
-        
+    
+        #Prints out the total score so far
     time.sleep(1)
     print(str(nick1) + " has " + str(p1_score) + " points so far")
     print()
     time.sleep(1)
     player_2_roll_1 = random.choice(roll_1)
     player_2_roll_2 = random.choice(roll_2)
-
+#Does the same or player 2
     total2 = player_2_roll_1 + player_2_roll_2
     print(nick2 + " got " +  str(player_2_roll_1 + player_2_roll_2) + " this round")
     time.sleep(1)
 #The points system where if the number on the dice is even they get 10 points or else 5 is deducted
+    if p1_score <0:
+        p1_score = p1_score*0
+        print("Score reset to 0")
+    elif p2_score<0:
+        p2_score = p2_score*0
+        print("Score reset to 0")
+
     if total2 %2 == 0:
         p2_score = p2_score + 10
         p2_score = p2_score + total2
@@ -93,30 +107,37 @@ for i in range(5):
         p2_score = p2_score - 5
         p2_score = p2_score + total2
     time.sleep(1)
+    #prints out player 2 total score so far
     print(str(nick2) + " has " + str(p2_score) + " points so far")
     print()
 
+#The winner is printed as the program compares the 2 final score whichever is bigger wins
 
 if p1_score > p2_score:
     print()
     print("-----The winner is " + str(nick1) + "-----")
     print("---With " + str(p1_score) + " Points!---")
 elif p1_score == p2_score:
+    #If the totals are the same it is a draw and each player rolls 1 six-sided dice and the winners name gets outputed
     print("-----Its a Draw!-----")
     print()
     print("Each Player will roll 1 six-sided dice and the person with the highest number wins!")
+    time.sleep(3)
     draw = random.randint(1,6)
     draw2 = random.randint(1,6)
+    #Says what each player
     print(nick1, " Rolled a " + str(draw))
+    time.sleep(5)
     print(nick2, " Rolled a " + str(draw2))
     if draw > draw2:
         print("-----The winner is " + str(nick1) + "-----")
     else:
         print("-----The winner is " + str(nick2) + "-----")
-
+#if layer 1 didnt win and it wasnt a draw then player 2 wins!
 else:
     print()
     print("-----The winner is " + str(nick2) + "-----")
     print("-----With " + str(p2_score) + " Points!-----")
-
+    time.sleep(1)
+#Outputs when the game is over
 input("\n\n\n-----Game Over-----\n---Press Enter To Quit---")
